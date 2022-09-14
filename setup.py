@@ -4,11 +4,11 @@ from setuptools import setup
 # https://stackoverflow.com/questions/47676721/register-an-internal-package-on-pypi
 
 setup(
-    name="somogym",
+    name="somogym_fork_vitoria",
     version=open("environments/_version.py").readlines()[-1].split()[-1].strip("\"'"), #assk to change name of this directory
     description="A light framework for the simulation of continuum manipulators",
     long_description="",
-    url="git@github.com:GrauleM/somogym",
+    url="git@github.com:vitoriarlima/somogym_fork_vitoria",
     author="Moritz A. Graule",
     author_email="moritz@graule.ch",
     license="unlicense",
@@ -18,7 +18,8 @@ setup(
     # general, maybe somo_environments would be more suitable
     packages=["environments", "environments.AntipodalGripper", "environments.InHandManipulation",
               "environments.InHandManipulationInverted", "environments.PenSpinner", "environments.PlanarBlockPushing",
-              "environments.PlanarReaching", "environments.PlanarReachingObstacle", "environments.SnakeLocomotionDiscrete",
+              "environments.PlanarReaching", "environments.PlanarReachingObstacle",
+              "environments.SnakeLocomotionDiscrete",
               "environments.utils"],
 
     classifiers=["Development Status :: 1 - Planning"],

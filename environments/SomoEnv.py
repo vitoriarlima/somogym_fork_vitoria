@@ -8,7 +8,8 @@ from gym import spaces
 
 import pybullet as p
 
-from environments.utils.debug_dashboard import Debugger
+from environments.utils.debug_dashboard import Debugger # why doesnt this work here
+
 
 # TODO: major: add ability to have dynamics noise, action noise, disturbances, observation noise
 class SomoEnv(gym.Env):

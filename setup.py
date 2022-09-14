@@ -18,7 +18,8 @@ setup(
     # general, maybe somo_environments would be more suitable
     packages=["environments", "environments.AntipodalGripper", "environments.InHandManipulation",
               "environments.InHandManipulationInverted", "environments.PenSpinner", "environments.PlanarBlockPushing",
-              "environments.PlanarReaching", "environments.PlanarReachingObstacle", "environments.SnakeLocomotionDiscrete"],
+              "environments.PlanarReaching", "environments.PlanarReachingObstacle", "environments.SnakeLocomotionDiscrete",
+              "environments.utils"],
 
     classifiers=["Development Status :: 1 - Planning"],
 )

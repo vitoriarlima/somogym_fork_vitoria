@@ -5,7 +5,7 @@ from setuptools import setup
 
 setup(
     name="somogym",
-    version=open("somogym/_version.py").readlines()[-1].split()[-1].strip("\"'"),
+    version=open("environments/_version.py").readlines()[-1].split()[-1].strip("\"'"), #assk to change name of this directory
     description="A light framework for the simulation of continuum manipulators",
     long_description="",
     url="git@github.com:GrauleM/somogym",

@@ -7,7 +7,12 @@ from somo.sm_continuum_manipulator import SMContinuumManipulator
 from somo.utils import load_constrained_urdf, dict_from_file
 
 from environments import SomoEnv
-from environments.InHandManipulation.env_utils import (
+# from environments.InHandManipulation.env_utils import (
+#     box_start_funcs,
+#     vary_segment_number,
+# )
+
+from environments.env_utils_v import (
     box_start_funcs,
     vary_segment_number,
 )

@@ -12,7 +12,7 @@ from environments import SomoEnv
 #     vary_segment_number,
 # )
 
-from environments.env_utils_v import (
+from environments.InHandManipulation.env_utils_v import (
     box_start_funcs,
     vary_segment_number,
 )

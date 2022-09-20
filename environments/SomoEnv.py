@@ -196,7 +196,7 @@ class SomoEnv(gym.Env):
 
         assert self.action_space.contains(
             action
-        ), f"action {action} not in action space"
+        ), f"action {action} not in action space" # ??? to assert that it contains it it means that it IS in the action space, no?
         assert (
             self.applied_torque is not None
         ), f"previous action is {self.applied_torque}"
@@ -381,7 +381,8 @@ class SomoEnv(gym.Env):
         self.modify_physics()
 
         # run some steps with constant 0 actuation to have steady state at start
-        start_action = np.zeros(self.action_space.shape)
+        start_action = np.zeros(self.action_space.shape) # This is float61, but the action space takes dtype of float32!
+        start_action = np.float32(start_action) # Adding this to make it acceptable for the action space!
         stabilization_time = 0.5  # time in the beginning to wait to stabilize # todo: should this maybe be given in the specific environment?
         self.applied_torque = start_action * self.torque_multiplier
 

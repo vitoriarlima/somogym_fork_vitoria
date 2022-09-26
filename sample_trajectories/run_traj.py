@@ -1,4 +1,5 @@
 import os
+import pdb
 import sys
 
 import gym
@@ -60,13 +61,22 @@ def gen_expert_data(
         expert_dir_abs_path = run_config["expert_dir_abs_path"]
     expert_abs_path = Path(expert_dir_abs_path) / run_config["expert_name"]
     expert_rel_path = Path(os.path.relpath(expert_abs_path))
+    # pdb.set_trace()
     expert_data_dir = expert_rel_path / "data"
     expert_traj_def_file = expert_rel_path / "traj.yaml"
+    # pdb.set_trace()
+
     if record_data:
         os.makedirs(expert_data_dir, exist_ok=True)
+        print("DID I GET HERE ?")
+
 
     vid_path = expert_rel_path / "vid.mp4"
-    obs = env.reset(run_render=run_render)
+    # env.reset(run_render=run_render)
+    env.reset()
+
+    # obs = env.reset(run_render=run_render)
+
 
     # Define a conversion function from real trajectories (differential pressure) to somo actuation torques.
     # todo: get rid of all somo traj dependencies...
@@ -132,6 +142,9 @@ def gen_expert_data(
             np.maximum(applied_action, np.array([-1.0] * action_len)),
             np.array([1.0] * action_len),
         )
+        restricted_action = np.float32(restricted_action)
+        # pdb.set_trace()
+
         _obs, _rewards, _dones, info = env.step(restricted_action)
 
         # TODO: seperate record_data functionality into its own file.
@@ -155,13 +168,17 @@ def gen_expert_data(
 
     if run_render and record_data:
         p.stopStateLogging(logIDvideo)
+        print("DID I GET HERE")
+
 
     env.close()
 
-    if record_data:
-        np.save(expert_data_dir / "torques.npy", np.array(torques))
+    if record_data == True:
+        np.save(expert_data_dir / "torques_.npy", np.array(torques))
         np.save(expert_data_dir / "positions.npy", np.array(positions))
         np.save(expert_data_dir / "velocities.npy", np.array(velocities))
+        pdb.set_trace()
+        print("DID I GET HERE")
 
 
 def main():

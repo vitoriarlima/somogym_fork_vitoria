@@ -6,8 +6,9 @@ import sys
 import yaml
 from pathlib import Path
 from stable_baselines3.common.utils import set_random_seed
+import pdb
 
-total_env_steps=5
+total_env_steps=1000
 from environments.InHandManipulation import InHandManipulation
 env_name = "InHandManipulation"
 
@@ -26,9 +27,13 @@ run_config_file = (
 with open(run_config_file, "r") as config_file:
     run_config = yaml.safe_load(config_file)
 
+# pdb.set_trace()
 
 
 import_environment("InHandManipulation")
+
+
+# pdb.set_trace()
 
 env = gym.make(
     run_config["env_id"],
@@ -38,11 +43,18 @@ env = gym.make(
     debug=False,
 )
 
+
+# pdb.set_trace()
 run_config["seed"] = 10110
 set_random_seed(run_config["seed"])
 env.seed(run_config["seed"])
 env.reset()
+pdb.set_trace()
 
 # run env for total_env_steps steps
 for _ in range(total_env_steps):
-    env.step(env.action_space.sample())  # take a random action
+    # pdb.set_trace()
+    # print("Did it get here?") #no it didnt
+    actions_ = env.action_space.sample()
+    # pdb.set_trace()
+    env.step(actions_)  # take a random action

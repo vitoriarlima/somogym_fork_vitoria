@@ -23,7 +23,7 @@ setup(
               "environments.utils"],
 
     classifiers=["Development Status :: 1 - Planning"],
-    package_data={'environments': ['InHandManipulation/benchmark_run_config.yaml']
+    package_data={'environments': ['*/benchmark_run_config.yaml']
                   },
     include_package_data=True,
 

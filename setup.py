@@ -27,7 +27,7 @@ setup(
     package_data={'environments': ['*/benchmark_run_config.yaml',
                                    '*/env_utils/*',
                                    '*/definitions/*',
-                                   '*/definitions/additional_urdfs/* '],
+                                   '*/definitions/additional_urdfs/*'],
                   'sample_trajectories': ['*/traj.yaml']
                   },
     include_package_data=True,

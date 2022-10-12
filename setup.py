@@ -20,10 +20,16 @@ setup(
               "environments.InHandManipulationInverted", "environments.PenSpinner", "environments.PlanarBlockPushing",
               "environments.PlanarReaching", "environments.PlanarReachingObstacle",
               "environments.SnakeLocomotionDiscrete",
-              "environments.utils"],
+              "environments.utils",
+              "sample_trajectories"],
 
     classifiers=["Development Status :: 1 - Planning"],
-    package_data={'environments': ['*/benchmark_run_config.yaml']
+    package_data={'environments': ['*/benchmark_run_config.yaml',
+                                   '*/env_utils/*',
+                                   '*/definitions/*',
+                                   '*/definitions/additional_urdfs/* ',
+                                   ],
+                  'sample_trajectories': ['*/traj.yaml']
                   },
     include_package_data=True,
 

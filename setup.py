@@ -24,6 +24,8 @@ setup(
 
     classifiers=["Development Status :: 1 - Planning"],
     include_package_data=True,
+    package_data={'environments': ['InHandManipulation/benchmark_run_config.yaml'],
+                  },
 
 )
 

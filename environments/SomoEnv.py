@@ -282,7 +282,7 @@ class SomoEnv(gym.Env):
 
     def reset(self, run_render=False):
 
-        run_render = run_render or self.render_gui
+        # run_render = run_render or self.render_gui
 
         # Log info to console
         print(f"\n\n\nENV RESET: episode {self.ep_count}.")

@@ -90,17 +90,18 @@ class PlanarBlockPushing(SomoEnv.SomoEnv):
             "box_target_dist_vector": 2,
             "target_pos": 2,
             "box_velocity": 2,
-            "positions": 2,
-            "velocities": 2,
+            "positions": 2,  # this will be the number it will get multiplied for
+            "velocities": 2,  # because x and y
             "tip_pos": 2,
             "tip_box_dist_vector": 2,
             "manipulator_box_dist": 2,
             "angles": 1,
             "curvatures": 1,
             "applied_input_torques": 4,
+            "avg_positions_per_act": 8,  # because this is 2 per actuaotor, we have 4 actuato
+            "avg_velocities_per_act": 8,
         }
-
-        obs_flags = self.run_config["observation_flags"]
+            obs_flags = self.run_config["observation_flags"]
         obs_len = 0
         for f in obs_flags:
             num_pts = obs_flags[f] if obs_flags[f] is not None else 1
@@ -216,6 +217,110 @@ class PlanarBlockPushing(SomoEnv.SomoEnv):
         if "applied_input_torques" in obs_flags:
             applied_input_torques = np.array(self.applied_torque)
             state = np.concatenate((state, applied_input_torques.flatten()))
+
+
+
+        if "avg_positions_per_act" in obs_flags:
+            positions = np.array(
+                [state["positions"][:, :2] for state in self.manipulator_states]
+            )
+            # print("POSITION")
+            # print(positions)
+            # print(positions.shape)
+
+            import pdb
+            # pdb.set_trace()
+            n_seg = self.manipulators[0].manipulator_definition.actuator_definitions[0].n_segments
+            # x_avg_per_act = np.mean(
+            #     positions[0][:,0].reshape(-1, self.run_config["n_segments"]), axis=1
+            # )
+            # y_avg_per_act = np.mean(
+            #     positions[0][:,1].reshape(-1, self.run_config["n_segments"]), axis=1
+            # )
+            x_avg_per_act = np.mean(
+                positions[0][:,0].reshape(-1, n_seg), axis=1
+            )
+            y_avg_per_act = np.mean(
+                positions[0][:,1].reshape(-1, n_seg), axis=1
+            )
+            avg_positions_per_act = np.vstack((x_avg_per_act, y_avg_per_act)).T
+
+            # print(" AVERAGE POSITION")
+            # print(avg_positions_per_act)
+            # print(avg_positions_per_act.shape)
+
+            if obs_flags["avg_positions_per_act"]:
+                positions = np.array(
+                    [
+                        self.reduce_state_len(ps, obs_flags["positions"])
+                        for ps in positions
+                    ]
+                )
+                # print("POSITION")
+                # print(positions)
+                # print(positions.shape)
+                x_avg_per_act = np.mean(
+                    positions[0][:, 0].reshape(-1, n_seg), axis=1
+                )
+                y_avg_per_act = np.mean(
+                    positions[0][:, 1].reshape(-1, n_seg), axis=1
+                )
+                avg_positions_per_act = np.vstack((x_avg_per_act, y_avg_per_act)).T
+                # print(" AVERAGE POSITION")
+                # print(avg_positions_per_act)
+                # print(avg_positions_per_act.shape)
+
+            state = np.concatenate((state, avg_positions_per_act.flatten()))
+
+        if "avg_velocities_per_act" in obs_flags:
+            velocities = np.array(
+                [state["velocities"][:, :2] for state in self.manipulator_states]
+            )
+            # pdb.set_trace()
+            # print("VELOCITIES")
+            # print(velocities)
+            # print(velocities.shape)
+
+            x_avg_per_act = np.mean(
+                velocities[0][:, 0].reshape(-1, n_seg), axis=1
+            )
+            y_avg_per_act = np.mean(
+                velocities[0][:, 1].reshape(-1, n_seg), axis=1
+            )
+            avg_velocities_per_act = np.vstack((x_avg_per_act, y_avg_per_act)).T
+
+            # pdb.set_trace()
+            # print("AVERAGE VELOCITIES")
+            # print(avg_velocities_per_act)
+            # print(avg_velocities_per_act.shape)
+
+            if obs_flags["avg_velocities_per_act"]:
+                velocities = np.array(
+                    [
+                        self.reduce_state_len(vs, obs_flags["velocities"])
+                        for vs in velocities
+                    ]
+                )
+                # print("VELOCITIES")
+                # print(velocities)
+                # print(velocities.shape)
+
+                x_avg_per_act = np.mean(
+                    velocities[0][:, 0].reshape(-1, n_seg), axis=1
+                )
+                y_avg_per_act = np.mean(
+                    velocities[0][:, 1].reshape(-1, n_seg), axis=1
+                )
+                avg_velocities_per_act = np.vstack((x_avg_per_act, y_avg_per_act)).T
+
+                # pdb.set_trace()
+                # print("AVERAGE VELOCITIES")
+                # print(avg_velocities_per_act)
+                # print(avg_velocities_per_act.shape)
+
+            state = np.concatenate((state, avg_velocities_per_act.flatten()))
+
+
 
         return state
 

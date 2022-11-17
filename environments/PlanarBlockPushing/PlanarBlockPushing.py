@@ -101,7 +101,7 @@ class PlanarBlockPushing(SomoEnv.SomoEnv):
             "avg_positions_per_act": 8,  # because this is 2 per actuaotor, we have 4 actuato
             "avg_velocities_per_act": 8,
         }
-            obs_flags = self.run_config["observation_flags"]
+        obs_flags = self.run_config["observation_flags"]
         obs_len = 0
         for f in obs_flags:
             num_pts = obs_flags[f] if obs_flags[f] is not None else 1

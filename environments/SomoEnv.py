@@ -7,7 +7,8 @@ from gym.utils import seeding
 from gym import spaces
 
 import pybullet as p
-
+from somo.sm_manipulator_definition import SMManipulatorDefinition
+from somo.sm_continuum_manipulator import SMContinuumManipulator
 from environments.utils.debug_dashboard import Debugger # why doesnt this work here
 
 from environments.utils import vary_segment_number

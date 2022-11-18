@@ -4,6 +4,7 @@ import pybullet as p
 
 from somo.sm_manipulator_definition import SMManipulatorDefinition
 from somo.sm_continuum_manipulator import SMContinuumManipulator
+from somo.utils import dict_from_file
 
 from environments import SomoEnv
 from environments.PlanarReaching.env_utils import (

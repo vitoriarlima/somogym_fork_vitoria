@@ -12,6 +12,7 @@ from environments import SomoEnv
 from environments.utils import vary_segment_number
 
 
+from somo.utils import dict_from_file
 
 class PlanarBlockPushing(SomoEnv.SomoEnv):
     def __init__(

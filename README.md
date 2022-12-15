@@ -51,6 +51,12 @@ To train and evaluate RL policies on SoMoGym environments, check out [SoMo-RL](h
     - `$ pip install git+https://github.com/graulem/somogym`
 7. To upgrade to the newest version: `$ pip install git+https://github.com/graulem/somogym --upgrade`
 
+## Google Colab Demo Code
+Also, we created a google colab to make things more intuitive to get you started.
+Click on the banner below for a Demo of this SomoGym code in Google Colab.
+
+[![Open In Colab](https://colab.research.google.com/drive/1nCiSWgL9s8R39R-RoLGffVkfNfcWWx4O?usp=sharing) 
+
 
 ## Contributing
 
